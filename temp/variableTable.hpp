@@ -1,0 +1,18 @@
+#ifndef VARIABLE_TABLE_HPP
+#define VARIABLE_TABLE_HPP
+
+#include <string>
+#include <unordered_map>
+namespace myexpr {
+
+class VariableTable {
+public:
+  void set(const std::string &name, double value);
+  auto get(const std::string &name) const -> double;
+
+private:
+  std::unordered_map<std::string, double> variables_;
+};
+
+} // namespace myexpr
+#endif // !VARIABLE_TABLE_HPP

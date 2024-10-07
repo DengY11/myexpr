@@ -1,2 +1,0 @@
-#ifndef MYEXPR_HPP
-#

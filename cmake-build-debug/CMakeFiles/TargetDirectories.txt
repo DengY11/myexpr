@@ -1,3 +1,0 @@
-/home/dylan/tinyexpr/cmake-build-debug/CMakeFiles/tinyexpr.dir
-/home/dylan/tinyexpr/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/dylan/tinyexpr/cmake-build-debug/CMakeFiles/rebuild_cache.dir
