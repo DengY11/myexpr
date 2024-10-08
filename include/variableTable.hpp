@@ -7,6 +7,8 @@ namespace myexpr {
 
 class VariableTable {
 public:
+  VariableTable() = default;
+  VariableTable(std::unordered_map<std::string, double> &initial_var);
   void set(const std::string &name, double value);
   auto get(const std::string &name) const -> double;
 

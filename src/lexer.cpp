@@ -7,9 +7,6 @@
 #include <memory>
 #include <stdexcept>
 namespace myexpr {
-// NOTE::内置函数表
-const std::unordered_set<std::string> Lexer::functions = {"sin", "cos",  "tan",
-                                                          "log", "sqrt", "abs"};
 
 Lexer::Lexer(const std::string &expression)
     : expression_(expression), pos_(0) {}
@@ -77,7 +74,7 @@ auto Lexer::nextToken() -> Token {
            peek_is_legal_function_or_variable_type()) {
       name += get();
     }
-    if (this->functions.find(name) != functions.end()) {
+    if (this->funcTable.exist(name)) {
       return Token(TokenType::Function, name);
     } else {
       return Token(TokenType::Variable, name);

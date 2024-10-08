@@ -1,7 +1,12 @@
-#include "variableTable.hpp"
+#include "../include/variableTable.hpp"
 #include <stdexcept>
 
 namespace myexpr {
+
+VariableTable::VariableTable(
+    std::unordered_map<std::string, double> &initial_vars) {
+  variables_ = std::move(initial_vars);
+}
 
 void VariableTable::set(const std::string &name, double value) {
   this->variables_[name] = value;

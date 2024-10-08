@@ -1,7 +1,9 @@
 #ifndef LEXER_HPP
 #define LEXER_HPP
 
+#include "./functionTable.hpp"
 #include "./token.hpp"
+#include "./variableTable.hpp"
 #include <cassert>
 #include <cctype>
 #include <cmath>
@@ -34,7 +36,8 @@ private:
   auto current_is_operator(char current) -> bool;
   std::string expression_;
   size_t pos_ = 0;
-  static const std::unordered_set<std::string> functions;
+  FunctionTable funcTable;
+  VariableTable varTable;
 };
 
 } // namespace myexpr

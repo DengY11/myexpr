@@ -25,7 +25,6 @@ public:
 
   auto parseFactor() -> std::shared_ptr<ExprNode>; // 实现对幂运算的解析
 
-  auto parseBase() -> std::shared_ptr<ExprNode>;
   // 实现对基础元素，如数字，变量，函数调用等
 
 private:
