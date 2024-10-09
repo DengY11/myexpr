@@ -28,6 +28,9 @@ public:
 
   auto get_pos() -> size_t;
   auto get_expression() -> std::string;
+  void add_function(std::string &name,
+                    std::function<double(const std::vector<double> &)> func);
+  void add_variable(std::string &name, double val);
 
 private:
   auto is_end() -> bool;

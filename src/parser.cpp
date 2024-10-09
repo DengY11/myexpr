@@ -86,4 +86,33 @@ auto Parser::parseFactor() -> std::shared_ptr<ExprNode> {
   throw std::runtime_error("Unknown factor");
 }
 
+void Parser::add_function_map(
+    std::unordered_map<std::string,
+                       std::function<double(const std::vector<double> &)>>
+        function_map) {
+  std::for_each(
+      std::begin(function_map), std::end(function_map),
+      [this](std::string &name,
+             std::function<double(const std::vector<double> &)> func) -> void {
+        this->add_function(name, func);
+      });
+}
+
+void Parser::add_function(
+    std::string &name,
+    std::function<double(const std::vector<double> &)> func) {
+  this->lexer_.add_function(name, func);
+}
+
+void Parser::add_variable_map(
+    std::unordered_map<std::string, double> variable_map) {
+  std::for_each(std::begin(variable_map), std::end(variable_map),
+                [this](std::string &name, double val) -> void {
+                  this->add_variable(name, val);
+                });
+}
+
+void Parser::add_variable(std::string &name, double val) {
+  this->lexer_.add_variable(name, val);
+}
 } // namespace myexpr

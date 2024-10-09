@@ -89,4 +89,12 @@ auto Lexer::nextToken() -> Token {
   return Token(TokenType::Error);
 }
 
+void Lexer::add_function(
+    std::string &name,
+    std::function<double(const std::vector<double> &)> func) {
+  this->funcTable.add(name, func);
+}
+void Lexer::add_variable(std::string &name, double val) {
+  this->varTable.set(name, val);
+}
 } // namespace myexpr

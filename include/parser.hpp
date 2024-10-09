@@ -15,6 +15,8 @@ namespace myexpr {
 
 class Parser {
 public:
+  // TODO::Parser() ;
+
   Parser(const std::string &lexpr);
 
   auto parse() -> std::shared_ptr<ExprNode>; // 解析方法
@@ -26,6 +28,15 @@ public:
   auto parseFactor() -> std::shared_ptr<ExprNode>; // 实现对幂运算的解析
 
   // 实现对基础元素，如数字，变量，函数调用等
+  void add_function_map(
+      std::unordered_map<std::string,
+                         std::function<double(const std::vector<double> &)>>
+          function_map);
+  void add_function(std::string &name,
+                    std::function<double(const std::vector<double> &)> func);
+
+  void add_variable_map(std::unordered_map<std::string, double> variable_map);
+  void add_variable(std::string &name, double val);
 
 private:
   void nextToken();
