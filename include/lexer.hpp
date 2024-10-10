@@ -19,6 +19,7 @@ namespace myexpr {
 
 class Lexer {
 public:
+  Lexer() = default;
   Lexer(const std::string &expr);
   auto nextToken() -> Token;
 
@@ -32,11 +33,21 @@ public:
                     std::function<double(const std::vector<double> &)> func);
   void add_variable(std::string &name, double val);
 
+  auto is_inited() -> bool;
+
+  void init_with_expression(const std::string &expr);
+  auto get_functable() -> FunctionTable &;
+
+  auto get_vartable() -> VariableTable &;
+
 private:
+  void check_initialization();
   auto is_end() -> bool;
   auto peek_is_legal_number_type() -> bool;
   auto peek_is_legal_function_or_variable_type() -> bool;
   auto current_is_operator(char current) -> bool;
+
+  bool inited_ = false;
   std::string expression_;
   size_t pos_ = 0;
   FunctionTable funcTable;

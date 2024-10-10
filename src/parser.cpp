@@ -10,6 +10,16 @@
 namespace myexpr {
 Parser::Parser(const std::string &expr) : lexer_(expr) { this->nextToken(); }
 
+auto Parser::parse() -> std::shared_ptr<ExprNode> {
+  return this->parseExpression();
+}
+
+auto Parser::parse(const std::string &expr) -> std::shared_ptr<ExprNode> {
+  this->lexer_.init_with_expression(expr);
+  this->nextToken();
+  return this->parseExpression();
+}
+
 void Parser::nextToken() { this->current_token_ = this->lexer_.nextToken(); }
 
 auto Parser::parseExpression() -> std::shared_ptr<ExprNode> {
@@ -115,4 +125,15 @@ void Parser::add_variable_map(
 void Parser::add_variable(std::string &name, double val) {
   this->lexer_.add_variable(name, val);
 }
+
+auto Parser::is_inited() -> bool { return this->inited_; }
+
+auto Parser::get_function_table() -> const FunctionTable & {
+  return this->lexer_.get_functable();
+}
+
+auto Parser::get_variable_table() -> const VariableTable & {
+  return this->lexer_.get_vartable();
+}
+
 } // namespace myexpr

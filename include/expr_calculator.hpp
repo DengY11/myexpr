@@ -17,7 +17,7 @@ using VariableMap = std::unordered_map<std::string, double>;
 
 class expr_calculator {
 public:
-  // TODO::expr_calculator();
+  expr_calculator();
   expr_calculator(std::string &expression);
   expr_calculator(std::string &expression, FunctionMap &function_map);
   expr_calculator(std::string &expression, VariableMap &variable_map);
@@ -25,10 +25,11 @@ public:
                   FunctionMap &function_map);
   expr_calculator(std::string &expression, FunctionMap &function_map,
                   VariableMap &variable_map);
-  void calculate();
-  auto get_result() -> double;
+  void calculate();            // TODO::
+  auto get_result() -> double; // TODO::
 
 private:
+  bool inited_;
   myexpr::Parser paser_;
   double result_;
 };

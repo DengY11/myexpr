@@ -15,11 +15,13 @@ namespace myexpr {
 
 class Parser {
 public:
-  // TODO::Parser() ;
+  Parser() = default;
 
   Parser(const std::string &lexpr);
 
   auto parse() -> std::shared_ptr<ExprNode>; // 解析方法
+
+  auto parse(const std::string &lexer) -> std::shared_ptr<ExprNode>;
 
   auto parseExpression() -> std::shared_ptr<ExprNode>; // 实现递归下降解析器
 
@@ -38,10 +40,17 @@ public:
   void add_variable_map(std::unordered_map<std::string, double> variable_map);
   void add_variable(std::string &name, double val);
 
+  auto get_variable_table() -> const VariableTable &;
+  auto get_function_table() -> const FunctionTable &;
+
+  auto is_inited() -> bool;
+
 private:
   void nextToken();
   Lexer lexer_;
   Token current_token_;
+  bool inited_ = false;
+  ;
 };
 
 } // namespace myexpr
