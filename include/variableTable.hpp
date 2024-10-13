@@ -11,6 +11,7 @@ public:
   VariableTable(std::unordered_map<std::string, double> &initial_var);
   void set(const std::string &name, double value);
   auto get(const std::string &name) const -> double;
+  auto exit(const std::string &name) const -> bool;
 
 private:
   std::unordered_map<std::string, double> variables_;

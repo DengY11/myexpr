@@ -20,4 +20,8 @@ auto VariableTable::get(const std::string &name) const -> double {
   throw std::runtime_error("Variable not found: " + name);
 }
 
+auto VariableTable::exit(const std::string &name) const -> bool {
+  return this->variables_.find(name) != this->variables_.end();
+}
+
 } // namespace myexpr

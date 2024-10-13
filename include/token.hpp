@@ -13,13 +13,24 @@
 #include <variant>
 
 namespace myexpr {
-enum class TokenType { Number, Operator, Function, Variable, End, Error };
+enum class TokenType {
+  Number,
+  Operator,
+  Function,
+  Variable,
+  End,
+  Error,
+  UNadded_var_or_function_name,
+  LET,
+  EQUAL,
+  UNadded_function_body
+};
 
 class Token {
 
 public:
   Token() = default;
-  Token(TokenType end_or_error_type);
+  Token(TokenType keyword_end_or_error_type);
   Token(TokenType number_type, double val);
   Token(TokenType function_or_variable_type, std::string &name);
   Token(TokenType operator_type, char sym);

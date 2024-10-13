@@ -56,7 +56,25 @@ auto Parser::parseTerm() -> std::shared_ptr<ExprNode> {
 }
 
 auto Parser::parseFactor() -> std::shared_ptr<ExprNode> {
-  if (current_token_.get_type() == TokenType::Number) {
+  if (current_token_.get_type() == TokenType::LET) {
+    // TODO::
+    nextToken();
+    if (current_token_.get_type() != TokenType::UNadded_var_or_function_name) {
+      throw std::runtime_error("behind keyword:let must be a legal name");
+    }
+    std::string name = current_token_.get_name();
+    nextToken();
+    if (current_token_.get_type() != TokenType::EQUAL) {
+      throw std::runtime_error("a variable or function must be initialized");
+    }
+    nextToken();
+    if (current_token_.get_type() == TokenType::Number) {
+      double value = current_token_.get_number();
+      this->add_variable(name, value);
+    } else if (current_token_.get_type() == TokenType::UNadded_function_body) {
+      // TODO::
+    }
+  } else if (current_token_.get_type() == TokenType::Number) {
     double value = current_token_.get_number();
     nextToken();
     return std::make_shared<ExprNode>(NodeType::Constant, value);

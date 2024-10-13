@@ -57,6 +57,16 @@ auto Lexer::current_is_operator(char current) -> bool {
           current == ')' || current == ',');
 }
 
+auto Lexer::current_is_equal(char current) -> bool {
+  check_initialization();
+  return current == '=';
+}
+
+auto Lexer::current_is_brackets(char current) -> bool {
+  check_initialization();
+  return current == '[' || current == ']';
+}
+
 auto Lexer::nextToken() -> Token {
   check_initialization();
   skipWhiteSpace();
@@ -75,23 +85,44 @@ auto Lexer::nextToken() -> Token {
     return Token(TokenType::Number, std::stod(numberStr));
   }
 
-  // 函数名或者变量名
+  // 字母
   if (std::isalpha(current)) {
     std::string name(1, current);
     while (pos_ < expression_.length() &&
            peek_is_legal_function_or_variable_type()) {
       name += get();
     }
+    if (name == "let") {
+      // TODO::LET
+      return Token(TokenType::LET);
+    }
     if (this->funcTable.exist(name)) {
       return Token(TokenType::Function, name);
-    } else {
+    } else if (this->varTable.exit(name)) {
       return Token(TokenType::Variable, name);
+    } else {
+      return Token(TokenType::UNadded_var_or_function_name, name);
+    }
+  }
+
+  // 方括号
+  if (current_is_brackets(current)) {
+    if (current == '[') {
+      std::string function_body;
+      while (pos_ < expression_.length()) {
+        function_body += get();
+        // TODO:
+      }
     }
   }
 
   // 操作符
   if (current_is_operator(current)) {
     return Token(TokenType::Operator, current);
+  }
+
+  if (current_is_equal(current)) {
+    return Token(TokenType::EQUAL);
   }
 
   return Token(TokenType::Error);

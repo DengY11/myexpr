@@ -46,6 +46,8 @@ private:
   auto peek_is_legal_number_type() -> bool;
   auto peek_is_legal_function_or_variable_type() -> bool;
   auto current_is_operator(char current) -> bool;
+  auto current_is_equal(char current) -> bool;
+  auto current_is_brackets(char current) -> bool;
 
   bool inited_ = false;
   std::string expression_;
